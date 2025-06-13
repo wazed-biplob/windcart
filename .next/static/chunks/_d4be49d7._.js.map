@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///media/wazed/Others/wazed/winddb.com/client/app/page.tsx"],"sourcesContent":["\"use client\";\n\nimport { useRouter } from \"next/navigation\";\nimport { useEffect } from \"react\";\n\nexport default function Home() {\n  const router = useRouter();\n\n  useEffect(() => {\n    router.push(\"/register\");\n  }, [router]);\n\n  return <></>;\n}\n"],"names":[],"mappings":";;;;AAEA;AACA;;;AAHA;;;AAKe,SAAS;;IACtB,MAAM,SAAS,CAAA,GAAA,oQAAA,CAAA,YAAS,AAAD;IAEvB,CAAA,GAAA,4RAAA,CAAA,YAAS,AAAD;0BAAE;YACR,OAAO,IAAI,CAAC;QACd;yBAAG;QAAC;KAAO;IAEX,qBAAO;AACT;GARwB;;QACP,oQAAA,CAAA,YAAS;;;KADF","debugId":null}},
-    {"offset": {"line": 46, "column": 0}, "map": {"version":3,"sources":["file:///media/wazed/Others/wazed/winddb.com/client/node_modules/.pnpm/next%4015.3.2_react-dom%4019.1.0_react%4019.1.0__react%4019.1.0/node_modules/next/navigation.js"],"sourcesContent":["module.exports = require('./dist/client/components/navigation')\n"],"names":[],"mappings":"AAAA,OAAO,OAAO","ignoreList":[0],"debugId":null}}]
-}
