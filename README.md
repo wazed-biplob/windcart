@@ -19,4 +19,4 @@ WindCart has all the basic to advanced level features an e-Commerce Web Platform
 
 ## 🚀 About Me
 
-I'm a MERN stack dev passanate with react-ecosystem, specially next.js; with love for mongodb and express.
+I'm a MERN stack dev passionate with react-ecosystem, specially next.js; with love for mongodb and express.

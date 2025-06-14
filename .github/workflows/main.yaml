@@ -1,0 +1,51 @@
+name: Build and Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      EC2_HOST: ${{ secrets.EC2_HOST }}
+      EC2_USER: ${{ secrets.EC2_USER }}
+      SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+
+    steps:
+      - name: 🧾 Checkout code
+        uses: actions/checkout@v3
+
+      - name: 📦 Install dependencies
+        run: npm install
+
+      - name: 🛠️ Build the app
+        run: npm run build
+
+      - name: 🔐 Set up SSH key and known hosts
+
+        run: |
+          mkdir -p ~/.ssh
+          printf "%s\n" "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          chmod 700 ~/.ssh
+          ssh-keyscan -H "$EC2_HOST" >> ~/.ssh/known_hosts
+
+      - name: 🚀 Deploy to EC2
+        run: |
+          ssh $EC2_USER@$EC2_HOST "echo Connected!"
+          ssh $EC2_USER@$EC2_HOST "mkdir -p ~/myapp"
+
+          rsync -avz \
+          --exclude='.git' \
+          --exclude='node_modules' \
+          --exclude='.github' \
+          . $EC2_USER@$EC2_HOST:~/myapp/
+
+          ssh $EC2_USER@$EC2_HOST << 'EOF'
+          cd ~/myapp
+          npm install --production
+          pm2 reload myapp || pm2 start dist/server.js --name myapp
+
+          EOF

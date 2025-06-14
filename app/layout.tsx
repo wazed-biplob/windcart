@@ -4,6 +4,7 @@ import "./globals.css";
 import { Roboto } from "next/font/google";
 import { Provider } from "react-redux";
 import { store } from "./api/store";
+import { ToastContainer } from "react-toastify";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({
     <html lang="en" className={roboto.className}>
       <body>
         <Provider store={store}>{children}</Provider>
+        <ToastContainer />
       </body>
     </html>
   );
